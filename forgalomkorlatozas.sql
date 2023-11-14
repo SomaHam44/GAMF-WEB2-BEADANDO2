@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Nov 03. 21:30
+-- Létrehozás ideje: 2023. Nov 14. 22:41
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -235,6 +235,16 @@ CREATE TABLE `menu` (
   `jogosultsag` varchar(3) NOT NULL,
   `sorrend` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- A tábla adatainak kiíratása `menu`
+--
+
+INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
+('bejelentkezes', 'Bejelentkezés', '', '100', 60),
+('elerhetoseg', 'Elérhetőség', '', '111', 20),
+('kezdolap', 'Kezdőlap', '', '111', 10),
+('kijelentkezes', 'Kijelentkezés', '', '011', 70);
 
 -- --------------------------------------------------------
 
