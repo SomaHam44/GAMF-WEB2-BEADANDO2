@@ -7,7 +7,7 @@ class Regisztracio_Controller
 	{
 		$regisztracioModel = new Regisztracio_Model;  //az osztályhoz tartozó modell
 		//a modellben belépteti a felhasználót
-		$retData = $regisztralModel->get_data($vars);
+		$retData = $regisztracioModel->get_data($vars);
 		if($retData['eredmeny'] == "ERROR")
 			$this->baseName = "belepes";
 		//betöltjük a nézetet

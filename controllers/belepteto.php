@@ -7,7 +7,7 @@ class Belepteto_Controller
 	{
 		$beleptetoModel = new Belepteto_Model;  //az osztályhoz tartozó modell
 		//a modellben belépteti a felhasználót
-		$retData = $beleptetModel->get_data($vars);
+		$retData = $beleptetoModel->get_data($vars);
 		if($retData['eredmeny'] == "ERROR")
 			$this->baseName = "bejelentkezes";
 		//betöltjük a nézetet
