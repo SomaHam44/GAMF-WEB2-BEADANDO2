@@ -2,7 +2,7 @@
 
 class Megvalositas_Model
 {
-	public function get_data($vars)
+	public function get_data()
 	{
 		$retData['eredmeny'] = "";
 		$retData['uzenet']="";

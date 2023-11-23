@@ -3,11 +3,11 @@
 class Megvalositas_Controller
 {
 	public $baseName = 'megvalositas';  //meghatározni, hogy melyik oldalon vagyunk
-	public function main($vars) // a router által továbbított paramétereket kapja
+	public function main() // a router által továbbított paramétereket kapja
 	{		
 		$megvalositasModel = new Megvalositas_Model;  //az osztályhoz tartozó modell
 		//a modellben belépteti a felhasználót
-		$retData = $megvalositasModel->get_data($vars);
+		$retData = $megvalositasModel->get_data();
 		if($retData['eredmeny'] == "ERROR")
 			echo "Hiba";
 		//betöltjük a nézetet

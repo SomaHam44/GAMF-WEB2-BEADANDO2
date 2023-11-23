@@ -3,8 +3,9 @@ $tomb=$viewData['lista'];
 ?>
 
 <head>
-<script type = "text/javascript" src = "jquery.min.js"></script>
+<!--<script type = "text/javascript" src = "jquery.min.js"></script>
 <script type = "text/javascript" src = "megvalositas.js"></script>
+-->
 </head>
 <h2> Megvalosítás: </h2>
 
