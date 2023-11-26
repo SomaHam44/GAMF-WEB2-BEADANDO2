@@ -22,6 +22,6 @@
         <section>
             <?php if($viewData['render']) include($viewData['render']); ?>
         </section>
-        <footer>&copy; Édes Élmény Cukrászda. All rights reserved. <?= date("Y") ?></footer>
+        <footer>&copy; Forgalomkorlátozások. All rights reserved. <?= date("Y") ?></footer>
     </body>
 </html>
