@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3306
--- Létrehozás ideje: 2023. Nov 26. 09:02
+-- Létrehozás ideje: 2023. Nov 26. 16:15
 -- Kiszolgáló verziója: 8.0.31
 -- PHP verzió: 8.0.26
 
@@ -36,14 +36,41 @@ CREATE TABLE IF NOT EXISTS `felhasznalok` (
   `jelszo` varchar(40) NOT NULL,
   `jogosultsag` varchar(3) NOT NULL DEFAULT '_1_',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 --
 -- A tábla adatainak kiíratása `felhasznalok`
 --
 
 INSERT INTO `felhasznalok` (`id`, `csaladi_nev`, `utonev`, `bejelentkezes`, `jelszo`, `jogosultsag`) VALUES
-(1, 'Jó', 'Játék', 'jojatek', '76191e44c8418bb5ab394fc97128a9a2f691d90e', '_1_');
+(1, 'Jó', 'Játék', 'jojatek', '76191e44c8418bb5ab394fc97128a9a2f691d90e', '_1_'),
+(2, 'Admin', 'Admin', 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', '__1');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `hir`
+--
+
+DROP TABLE IF EXISTS `hir`;
+CREATE TABLE IF NOT EXISTS `hir` (
+  `hirId` int NOT NULL AUTO_INCREMENT,
+  `idopont` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tartalom` text CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
+  `login` text CHARACTER SET utf16 COLLATE utf16_hungarian_ci NOT NULL,
+  PRIMARY KEY (`hirId`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf16 COLLATE=utf16_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `hir`
+--
+
+INSERT INTO `hir` (`hirId`, `idopont`, `tartalom`, `login`) VALUES
+(4, '2023-11-14 08:00:14', 'Legjobb weboldal a világon!', 'kiskanal'),
+(2, '2023-11-13 11:39:52', 'Nagyon szuper!', 'kiskanal'),
+(3, '2023-11-13 11:40:52', 'Szép!', 'kiskanal'),
+(7, '2023-11-14 08:06:34', 'Oké', 'kiskanal'),
+(10, '2023-11-23 15:31:55', 'Szuper lett!', 'kiskanal');
 
 -- --------------------------------------------------------
 
@@ -263,6 +290,8 @@ INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
 ('elerhetoseg', 'Elérhetőség', '', '111', 20),
 ('kilepes', 'Kilépés', '', '011', 70),
 ('lekerdezo', 'Lekérdező', '', '110', 30),
+('listazo', 'Korlátozások', 'lekerdezo', '110', 35),
+('munkak', 'Munkák', 'lekerdezo', '110', 38),
 ('nyitolap', 'Nyitólap', '', '111', 10),
 ('uzenet', 'Nekünk írták', '', '011', 55);
 
