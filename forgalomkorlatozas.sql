@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2023. Nov 14. 22:41
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Gép: 127.0.0.1:3306
+-- Létrehozás ideje: 2023. Nov 26. 09:02
+-- Kiszolgáló verziója: 8.0.31
+-- PHP verzió: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,14 +27,23 @@ SET time_zone = "+00:00";
 -- Tábla szerkezet ehhez a táblához `felhasznalok`
 --
 
-CREATE TABLE `felhasznalok` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `felhasznalok`;
+CREATE TABLE IF NOT EXISTS `felhasznalok` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `csaladi_nev` varchar(45) NOT NULL,
   `utonev` varchar(45) NOT NULL,
   `bejelentkezes` varchar(12) NOT NULL,
   `jelszo` varchar(40) NOT NULL,
-  `jogosultsag` varchar(3) NOT NULL DEFAULT '_1_'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `jogosultsag` varchar(3) NOT NULL DEFAULT '_1_',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+--
+-- A tábla adatainak kiíratása `felhasznalok`
+--
+
+INSERT INTO `felhasznalok` (`id`, `csaladi_nev`, `utonev`, `bejelentkezes`, `jelszo`, `jogosultsag`) VALUES
+(1, 'Jó', 'Játék', 'jojatek', '76191e44c8418bb5ab394fc97128a9a2f691d90e', '_1_');
 
 -- --------------------------------------------------------
 
@@ -42,18 +51,22 @@ CREATE TABLE `felhasznalok` (
 -- Tábla szerkezet ehhez a táblához `korlatozas`
 --
 
-CREATE TABLE `korlatozas` (
-  `az` int(11) NOT NULL,
-  `utszam` int(11) NOT NULL,
+DROP TABLE IF EXISTS `korlatozas`;
+CREATE TABLE IF NOT EXISTS `korlatozas` (
+  `az` int NOT NULL AUTO_INCREMENT,
+  `utszam` int NOT NULL,
   `kezdet` double NOT NULL,
   `veg` double NOT NULL,
   `telepules` varchar(100) NOT NULL,
   `mettol` date NOT NULL,
   `meddig` date NOT NULL,
-  `megnevid` int(11) NOT NULL,
-  `mertekid` int(11) NOT NULL,
-  `sebesseg` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `megnevid` int NOT NULL,
+  `mertekid` int NOT NULL,
+  `sebesseg` int NOT NULL,
+  PRIMARY KEY (`az`),
+  KEY `megnevezes_ibfk_1` (`megnevid`),
+  KEY `mertek_ibfk_1` (`mertekid`)
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb3;
 
 --
 -- A tábla adatainak kiíratása `korlatozas`
@@ -200,10 +213,12 @@ INSERT INTO `korlatozas` (`az`, `utszam`, `kezdet`, `veg`, `telepules`, `mettol`
 -- Tábla szerkezet ehhez a táblához `megnevezes`
 --
 
-CREATE TABLE `megnevezes` (
-  `id` int(11) NOT NULL,
-  `nev` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+DROP TABLE IF EXISTS `megnevezes`;
+CREATE TABLE IF NOT EXISTS `megnevezes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nev` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 
 --
 -- A tábla adatainak kiíratása `megnevezes`
@@ -228,23 +243,28 @@ INSERT INTO `megnevezes` (`id`, `nev`) VALUES
 -- Tábla szerkezet ehhez a táblához `menu`
 --
 
-CREATE TABLE `menu` (
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE IF NOT EXISTS `menu` (
   `url` varchar(30) NOT NULL,
   `nev` varchar(30) NOT NULL,
   `szulo` varchar(30) NOT NULL,
   `jogosultsag` varchar(3) NOT NULL,
-  `sorrend` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `sorrend` tinyint NOT NULL,
+  PRIMARY KEY (`url`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- A tábla adatainak kiíratása `menu`
 --
 
 INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
-('bejelentkezes', 'Bejelentkezés', '', '100', 60),
+('admin', 'Admin', '', '001', 80),
+('belepes', 'Belépés', '', '100', 60),
 ('elerhetoseg', 'Elérhetőség', '', '111', 20),
-('kezdolap', 'Kezdőlap', '', '111', 10),
-('kijelentkezes', 'Kijelentkezés', '', '011', 70);
+('kilepes', 'Kilépés', '', '011', 70),
+('lekerdezo', 'Lekérdező', '', '110', 30),
+('nyitolap', 'Nyitólap', '', '111', 10),
+('uzenet', 'Nekünk írták', '', '011', 55);
 
 -- --------------------------------------------------------
 
@@ -252,10 +272,12 @@ INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
 -- Tábla szerkezet ehhez a táblához `mertek`
 --
 
-CREATE TABLE `mertek` (
-  `id` int(11) NOT NULL,
-  `nev` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+DROP TABLE IF EXISTS `mertek`;
+CREATE TABLE IF NOT EXISTS `mertek` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nev` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 
 --
 -- A tábla adatainak kiíratása `mertek`
@@ -268,70 +290,6 @@ INSERT INTO `mertek` (`id`, `nev`) VALUES
 (4, 'teljes lezárás'),
 (5, 'nincs lezárás'),
 (6, 'nehezen járható');
-
---
--- Indexek a kiírt táblákhoz
---
-
---
--- A tábla indexei `felhasznalok`
---
-ALTER TABLE `felhasznalok`
-  ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `korlatozas`
---
-ALTER TABLE `korlatozas`
-  ADD PRIMARY KEY (`az`),
-  ADD KEY `megnevezes_ibfk_1` (`megnevid`),
-  ADD KEY `mertek_ibfk_1` (`mertekid`);
-
---
--- A tábla indexei `megnevezes`
---
-ALTER TABLE `megnevezes`
-  ADD PRIMARY KEY (`id`);
-
---
--- A tábla indexei `menu`
---
-ALTER TABLE `menu`
-  ADD PRIMARY KEY (`url`);
-
---
--- A tábla indexei `mertek`
---
-ALTER TABLE `mertek`
-  ADD PRIMARY KEY (`id`);
-
---
--- A kiírt táblák AUTO_INCREMENT értéke
---
-
---
--- AUTO_INCREMENT a táblához `felhasznalok`
---
-ALTER TABLE `felhasznalok`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT a táblához `korlatozas`
---
-ALTER TABLE `korlatozas`
-  MODIFY `az` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
-
---
--- AUTO_INCREMENT a táblához `megnevezes`
---
-ALTER TABLE `megnevezes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT a táblához `mertek`
---
-ALTER TABLE `mertek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Megkötések a kiírt táblákhoz
