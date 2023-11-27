@@ -1,6 +1,6 @@
 <?php
 
-class Merteklekerdezo_Model
+class Lekerdezo_mertekek_Model
 {
 	public function get_data($vars)
 	{

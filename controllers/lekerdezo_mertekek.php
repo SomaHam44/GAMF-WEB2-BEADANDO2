@@ -1,13 +1,13 @@
 <?php
 
-class Merteklekerdezo_Controller
+class Lekerdezo_mertekek_Controller
 {
-	public $baseName = 'merteklekerdezo';  //meghatározni, hogy melyik oldalon vagyunk
+	public $baseName = 'lekerdezo_mertekek';  //meghatározni, hogy melyik oldalon vagyunk
 	public function main($vars) // a router által továbbított paramétereket kapja
 	{		
-		$merteklekerdezoModel = new Merteklekerdezo_Model;  //az osztályhoz tartozó modell
+		$lekerdezo_mertekekModel = new Lekerdezo_mertekek_Model;  //az osztályhoz tartozó modell
 		//a modellben belépteti a felhasználót
-		$retData = $merteklekerdezoModel->get_data();
+		$retData = $lekerdezo_mertekekModel->get_data($vars);
 		if($retData['eredmeny'] == "ERROR")
 			echo "Hiba";
 		//betöltjük a nézetet
