@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3306
--- Létrehozás ideje: 2023. Nov 26. 16:15
+-- Létrehozás ideje: 2023. Nov 27. 18:36
 -- Kiszolgáló verziója: 8.0.31
 -- PHP verzió: 8.0.26
 
@@ -289,10 +289,11 @@ INSERT INTO `menu` (`url`, `nev`, `szulo`, `jogosultsag`, `sorrend`) VALUES
 ('belepes', 'Belépés', '', '100', 60),
 ('elerhetoseg', 'Elérhetőség', '', '111', 20),
 ('kilepes', 'Kilépés', '', '011', 70),
-('lekerdezo', 'Lekérdező', '', '110', 30),
-('listazo', 'Korlátozások', 'lekerdezo', '110', 35),
-('munkak', 'Munkák', 'lekerdezo', '110', 38),
+('lekerdezo', 'Lekérdező', '', '011', 30),
+('listazo', 'Korlátozások', 'lekerdezo', '011', 35),
+('munkak', 'Munkák', 'lekerdezo', '011', 38),
 ('nyitolap', 'Nyitólap', '', '111', 10),
+('nyomtat', 'PDF', '', '011', 68),
 ('uzenet', 'Nekünk írták', '', '011', 55);
 
 -- --------------------------------------------------------
