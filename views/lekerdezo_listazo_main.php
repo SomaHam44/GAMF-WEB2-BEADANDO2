@@ -47,6 +47,9 @@ for($i=0;$i<count($tomb);$i++){   ?>
 </tr>               
 <?php } ?>
 </table>
+<form action="<?php echo SITE_ROOT?>pdf/pdf.php" method="get">
+  <input type="submit" value="Forgalomkorlátozások listája">
+</form>
 
 
 Ide pedig kell egy pdf nyomtatás funkció, ami a fejlécben megjeleníti a szűrési feltételeket, és táblázatban a szűrt listát.

@@ -6,7 +6,7 @@
         $dbh = new PDO('mysql:host=localhost;dbname=forgalomkorlatozas', 'root', '',
                       array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
         $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
-        $stmt = $dbh->query("select distinct utszam from korlatozas");
+        $stmt = $dbh->query("SELECT distinct utszam from korlatozas");
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               $eredmeny["lista"][] = array("utszam" => $row['utszam']);
         }
@@ -21,7 +21,7 @@
         $dbh = new PDO('mysql:host=localhost;dbname=forgalomkorlatozas', 'root', '',
                       array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
         $dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
-        $stmt = $dbh->prepare("select distinct telepules from korlatozas where utszam = :utszam");
+        $stmt = $dbh->prepare("SELECT distinct telepules from korlatozas where utszam = :utszam");
         $stmt->execute(Array(":telepules" => $_POST["telepules"]));
         while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
               $eredmeny["lista"][] = array("telepules" => $row['telepules']);
@@ -56,7 +56,7 @@
         $stmt = $dbh->prepare("SELECT korlatozas.telepules, korlatozas.utszam, korlatozas.kezdet, korlatozas.veg, megnevezes.nev as megnevezes, 
         mertek.nev as mertek, korlatozas.sebesseg, korlatozas.mettol, korlatozas.meddig FROM `korlatozas` 
         INNER JOIN megnevezes on korlatozas.megnevid=megnevezes.id 
-        INNER JOIN mertek ON korlatozas.mertekid=mertek.id  where (megnevid = :megnevid AND telepules=:telepules");
+        INNER JOIN mertek ON korlatozas.mertekid=mertek.id  where (megnevid = :megnevid AND telepules=:telepules)");
         $stmt->execute(Array(":id" => $_POST["id"]));
         $ret=$stmt->fetchAll(PDO::FETCH_ASSOC);
         $eredmeny["lista"][] = array("telepules" => $ret['telepules'], "utszam" => $row['utszam'], 

@@ -1,8 +1,6 @@
-<?php 
-$tomb=$viewData['lista'];
-
-$url = "http://localhost/web2_b2/models/merteklekerdezo_model.php";
-
+<?php
+$url = "http://localhost/web2_b2/rest/server.php";
+$result = "";
 if(isset($_POST['id']))
 {
   // Felesleges szóközök eldobása
@@ -62,38 +60,8 @@ $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $tabla = curl_exec($ch);
 curl_close($ch);
+
 ?>
-
-<head>
-</head>
-<h2> Mértékek lekérdezése: </h2>
-
-<form action="<?= SITE_ROOT ?>merteklekerdezo" method="post">
-        <label>Új mérték: </label><input type="text" required>
-      <input type="submit" id="gomb" value="Beszúrás">
-      <br><br>
-</form>
-
-<table>
-<tr>
-    <th>Mérték neve</th>
-    <th>Módosítás</th>
-    <th>Törlés</th>																							
-</tr>
-		
-<?php 
-
-for($i=0;$i<count($tomb);$i++){   ?> 
-    
-<tr>
-    <td><?php echo($tomb[$i]['nev'])?></td>
-    <td><input type="submit" id="gomb" value="Módosítás"></td>
-    <td><input type="submit" id="gomb" value="Törlés"></td>								
-</tr>               
-<?php } ?>
-</table>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +76,7 @@ for($i=0;$i<count($tomb);$i++){   ?>
     <h2>Módosítás / Beszúrás</h2>
     <form method="post">
     Id: <input type="text" name="id"><br><br>
-    Név: <input type="text" name="nev" maxlength="45"> 
+    Név: <input type="text" name="n" maxlength="45"> 
     <input type="submit" value = "Küldés">
     </form>
 </body>
