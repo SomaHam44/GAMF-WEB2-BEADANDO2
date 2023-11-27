@@ -5,6 +5,8 @@
         <title>Forgalomkorlátozások</title>
         <link rel="stylesheet" type="text/css" href="<?php echo SITE_ROOT?>css/main.css">
         <?php if($viewData['style']) echo '<link rel="stylesheet" type="text/css" href="'.$viewData['style'].'">'; ?>
+        <script type="text/javascript" src = "<?php echo SITE_ROOT?>js/jquery.min.js"></script>
+        <script type="text/javascript" src = "<?php echo SITE_ROOT?>js/lekerdezo_listazo.js"></script>
     </head>
     <body>
         <header>

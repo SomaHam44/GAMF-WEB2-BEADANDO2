@@ -9,6 +9,7 @@ header {
     height: 5em;
     text-align: center;    
     text-shadow: 2px 2px gainsboro;
+    color: black;
 }
 
 footer {    
@@ -87,4 +88,7 @@ label {
 input {
     padding: 5px 2px;
     margin: 10px 5px;
+}
+select {
+    width: 115px;
 }

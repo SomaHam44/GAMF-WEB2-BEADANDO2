@@ -1,11 +1,21 @@
 <?php 
 $tomb=$viewData['lista'];
-?>
+?>  
 
 <h2> Forgalom korlátozások: </h2>
 Ide kellene egy szűrő AJAX megoldással: 
-- egy autocomlete mező, ahol megadhatom a települést
+- egy autocomplete mező, ahol megadhatom a települést
 - és egy dátum választó, ami a felületen szűr a dátumra (a megadott dátum a "mettől-meddig" intervallumba essen.)
+<form>
+<label for='utszamcimke'>Útszám:</label>
+<select id = 'utszamselect'></select>
+<br><br>
+<label for = 'telepulescimke'>Település:</label>
+<select id = 'telepulesselect'></select>
+<br><br>
+<label for = 'megnevezescimke'>Megnevezés:</label>
+<select id = 'megnevezesselect'></select>
+</form>
 
 <table>
 <tr>
@@ -37,5 +47,6 @@ for($i=0;$i<count($tomb);$i++){   ?>
 </tr>               
 <?php } ?>
 </table>
+
 
 Ide pedig kell egy pdf nyomtatás funkció, ami a fejlécben megjeleníti a szűrési feltételeket, és táblázatban a szűrt listát.
