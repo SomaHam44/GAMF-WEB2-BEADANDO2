@@ -1,7 +1,7 @@
 <br>
 GAMF WEB2 BEADANDÓ2
 <br>
-Projekt neve: Forgalomkorlátozó
+Projekt neve: Forgalomkorlátozások
 <br>
 Téma: Forgalomkorlátozás
 <br>
