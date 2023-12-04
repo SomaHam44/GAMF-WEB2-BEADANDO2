@@ -1,21 +1,18 @@
 <?php 
 $tomb=$viewData['lista'];
-?>  
+?> 
+<div id='gombok'>
+  <form action="<?php echo SITE_ROOT?>pdf/pdf.php" method="get">
+    <input type="submit" value="Lista nyomtatás">
+  </form>
+  <a id='gomb' href="<?php echo SITE_ROOT?>js/lekerdezo_listazo_main.html" 
+  target="popup" onclick="window.open('<?php echo SITE_ROOT?>js/lekerdezo_listazo_main.html','popup','width=800,height=500');return false">
+    <button> Részetes nyomtatás</button>
+  </a>
+  <br><br><br>
+</div>
 
 <h2> Forgalom korlátozások: </h2>
-Ide kellene egy szűrő AJAX megoldással: 
-- egy autocomplete mező, ahol megadhatom a települést
-- és egy dátum választó, ami a felületen szűr a dátumra (a megadott dátum a "mettől-meddig" intervallumba essen.)
-<form>
-<label for='utszamcimke'>Útszám:</label>
-<select id = 'utszamselect'></select>
-<br><br>
-<label for = 'telepulescimke'>Település:</label>
-<select id = 'telepulesselect'></select>
-<br><br>
-<label for = 'megnevezescimke'>Megnevezés:</label>
-<select id = 'megnevezesselect'></select>
-</form>
 
 <table>
 <tr>
@@ -28,8 +25,7 @@ Ide kellene egy szűrő AJAX megoldással:
     <th>Sebesség</th>
     <th>Mettől</th>
     <th>Meddig</th>																			
-</tr>
-		
+</tr>		
 <?php 
 
 for($i=0;$i<count($tomb);$i++){   ?> 
@@ -47,9 +43,4 @@ for($i=0;$i<count($tomb);$i++){   ?>
 </tr>               
 <?php } ?>
 </table>
-<form action="<?php echo SITE_ROOT?>pdf/pdf.php" method="get">
-  <input type="submit" value="Forgalomkorlátozások listája">
-</form>
 
-
-Ide pedig kell egy pdf nyomtatás funkció, ami a fejlécben megjeleníti a szűrési feltételeket, és táblázatban a szűrt listát.

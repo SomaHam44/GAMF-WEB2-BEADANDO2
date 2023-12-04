@@ -1,15 +1,17 @@
 <?php
 // A TCPDF 6. példájának a segítségével
+$utszam=$_GET['utszam'];
+$telepules=$_GET['telepules'];
+$megnevezes=$_GET['megnevezes'];
 
 try {
-
-	
 	$dbh = new PDO('mysql:host=localhost;dbname=forgalomkorlatozas', 'root', '',
 				array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 	$dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
    
-	$sql = "SELECT  korlatozas.az, korlatozas.mettol, korlatozas.meddig, mertek.nev as mertek, megnevezes.nev
-    FROM `korlatozas` INNER JOIN megnevezes on korlatozas.megnevid=megnevezes.id INNER JOIN mertek ON korlatozas.mertekid=mertek.id";     
+	$sql = "SELECT  korlatozas.kezdet, korlatozas.veg, mertek.nev as mertek, korlatozas.sebesseg, korlatozas.mettol, korlatozas.meddig 
+    FROM `korlatozas` INNER JOIN megnevezes on korlatozas.megnevid=megnevezes.id INNER JOIN mertek ON korlatozas.mertekid=mertek.id
+    WHERE ((korlatozas.utszam='".$utszam."' AND korlatozas.telepules='".$telepules."') AND megnevezes.nev='".$megnevezes."')";     
 	$sth = $dbh->query($sql);
 	$rows = $sth->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -26,12 +28,12 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Forgalomkorlátozó');
-$pdf->SetTitle('Korlátozások listája');
+$pdf->SetTitle('Korlátozások');
 $pdf->SetSubject('Korlatozás export');
-$pdf->SetKeywords('TCPDF, PDF, Forgalomkorlátozás');
+$pdf->SetKeywords('TCPDF, PDF, Forgalomkorlátozó');
 
 // set default header data
-$pdf->SetHeaderData("nje.png", 25, "Korlátozások", "Forgalomkorlátozás\nLétrehozva:\n".date('Y.m.d',time()));
+$pdf->SetHeaderData("nje.png", 25, "Korlátozások", "Web-programozás II\nLétrehozva:\n".date('Y.m.d',time()));
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -69,12 +71,13 @@ $html  = '
 	<body>
 		<h1 style="text-align: center; color: blue;">Forgalomkorlátozások</h1>
 		<table>
-			<tr style="background-color: red; color: white;">
-			<th style="width: 5%;">&nbsp;<br>&nbsp;<br>&nbsp;</th>
-			<th style="width: 20%;">&nbsp;<br>Mettől</th>
-			<th style="width: 20%;">&nbsp;<br>Meddig</th>
-			<th style="width: 20%;">&nbsp;<br>Mérték</th>
-			<th style="width: 35%;">&nbsp;<br>Megnevezés</th>            
+			<tr style="background-color: red; color: white;">			
+			<th style="width: 10%;">&nbsp;<br>Kezdet</th>
+			<th style="width: 10%;">&nbsp;<br>Vég</th>
+			<th style="width: 16%;">&nbsp;<br>Mérték</th>
+            <th style="width: 10%;">&nbsp;<br>Sebesség</th>
+            <th style="width: 22%;">&nbsp;<br>Mettől</th>
+			<th style="width: 22%;">&nbsp;<br>Meddig</th>            
 			</tr>
 ';
 			$i=1;
@@ -122,7 +125,5 @@ $pdf->writeHTML($html, true, false, true, false, '');
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('lista.pdf', 'I');
-
-
+$pdf->Output('proba2.pdf', 'I');
 

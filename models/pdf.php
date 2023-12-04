@@ -3,13 +3,12 @@
 
 try {
 
-	
-	$dbh = new PDO('mysql:host=localhost;dbname=forgalomkorlatozas', 'root', '',
+	$dbh = new PDO('mysql:host=localhost;dbname=web2', 'root', '',
 				array(PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION));
 	$dbh->query('SET NAMES utf8 COLLATE utf8_hungarian_ci');
-   
-	$sql = "SELECT  korlatozas.az, korlatozas.mettol, korlatozas.meddig, mertek.nev as mertek, megnevezes.nev
-    FROM `korlatozas` INNER JOIN megnevezes on korlatozas.megnevid=megnevezes.id INNER JOIN mertek ON korlatozas.mertekid=mertek.id";     
+
+	$sql = "SELECT korlatozas.telepules, korlatozas.utszam, korlatozas.kezdet, korlatozas.veg, megnevezes.nev as megnevezes, mertek.nev as mérték, korlatozas.sebesseg, korlatozas.mettol, korlatozas.meddig FROM `korlatozas` 
+    INNER JOIN megnevezes on korlatozas.megnevid=megnevezes.id INNER JOIN mertek ON korlatozas.mertekid=mertek.id";     
 	$sth = $dbh->query($sql);
 	$rows = $sth->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -25,13 +24,13 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Forgalomkorlátozó');
-$pdf->SetTitle('Korlátozások listája');
-$pdf->SetSubject('Korlatozás export');
-$pdf->SetKeywords('TCPDF, PDF, Forgalomkorlátozás');
+$pdf->SetAuthor('Web-programozás II');
+$pdf->SetTitle('FELHASZNÁLÓK');
+$pdf->SetSubject('Web-programozás II - 3. Labor - TCPDF');
+$pdf->SetKeywords('TCPDF, PDF, Web-programozás II, Labor3');
 
 // set default header data
-$pdf->SetHeaderData("nje.png", 25, "Korlátozások", "Forgalomkorlátozás\nLétrehozva:\n".date('Y.m.d',time()));
+$pdf->SetHeaderData("nje.png", 25, "FELHASZNÁLÓK LISTÁJA", "Web-programozás II\n3. Labor\n".date('Y.m.d',time()));
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -67,14 +66,14 @@ $html  = '
 		</style>
 	</head>
 	<body>
-		<h1 style="text-align: center; color: blue;">Forgalomkorlátozások</h1>
+		<h1 style="text-align: center; color: blue;">FELHASZNÁLÓK</h1>
 		<table>
 			<tr style="background-color: red; color: white;">
 			<th style="width: 5%;">&nbsp;<br>&nbsp;<br>&nbsp;</th>
-			<th style="width: 20%;">&nbsp;<br>Mettől</th>
-			<th style="width: 20%;">&nbsp;<br>Meddig</th>
-			<th style="width: 20%;">&nbsp;<br>Mérték</th>
-			<th style="width: 35%;">&nbsp;<br>Megnevezés</th>            
+			<th style="width: 20%;">&nbsp;<br>CSALÁDI NÉV</th>
+			<th style="width: 20%;">&nbsp;<br>UTÓNÉV</th>
+			<th style="width: 20%;">&nbsp;<br>BEJELENTKEZÉS</th>
+			<th style="width: 35%;">&nbsp;<br>JELSZÓ</th>
 			</tr>
 ';
 			$i=1;
@@ -122,7 +121,5 @@ $pdf->writeHTML($html, true, false, true, false, '');
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('lista.pdf', 'I');
-
-
+$pdf->Output('labor3-1.pdf', 'I');
 
