@@ -7,6 +7,7 @@
         <?php if($viewData['style']) echo '<link rel="stylesheet" type="text/css" href="'.$viewData['style'].'">'; ?>
         <script type="text/javascript" src = "<?php echo SITE_ROOT?>js/jquery.min.js"></script>
         <script type="text/javascript" src = "<?php echo SITE_ROOT?>js/lekerdezo_listazo.js"></script>
+        <script type="text/javascript" src = "<?php echo SITE_ROOT?>js/objektumorientalt.js"></script>
     </head>
     <body>
         <header>
