@@ -55,6 +55,10 @@ a {
     padding:0.2em 0.6em;
     border-right:1px solid white;
 }
+#gomb {
+    background-color: white;
+}
+
 a.selected{
     background-color: red;
 }

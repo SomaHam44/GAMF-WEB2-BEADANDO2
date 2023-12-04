@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8">  
   <script type="text/javascript" src = "jquery.min.js"></script>
   <script type="text/javascript" src = "lekerdezo_listazo_main.js"></script>
   <title>Listázó</title>
@@ -36,19 +36,22 @@
   </style>
   </head>
   <body>
-    <h1>Forgalomkorlátozások:</h1>
-    <div id= 'adatok'>
-      <label for='telepulescimke'>Település:</label><br>
-      <select id = 'telepulesselect'></select>
-      <br><br>
-      <label for = 'mertekcimke'>Mérték:</label><br>
-      <select id = 'mertekselect'></select>
-      <br><br>
-      <label for = 'munkacimke'>Munka:</label><br>
-      <select id = 'munkaselect'></select>  
-    </div>    
-    <div id = 'informaciosdiv'>  
-      <div id = 'intezmenyinfo'>
+    
+    <h2>Forgalomkorlátozások:</h2>
+
+    
+    <div id = 'informaciosdiv'>
+      <div id= 'adatok'>
+        <label for='telepulescimke'>Település:</label><br>
+        <select id = 'telepulesselect'></select>
+        <br><br>
+        <label for = 'mertekcimke'>Mérték:</label><br>
+        <select id = 'mertekselect'></select>
+        <br><br>
+        <label for = 'munkacimke'>Munka:</label><br>
+        <select id = 'munkaselect'></select>  
+      </div>          
+      <div id = 'intezmenyinfo'>        
         <span class="cimke">ID:</span><span id="az" class="adat"></span><br>
         <span class="cimke">Kezdete:</span><span id="mettol" class="adat"></span><br>
         <span class="cimke">Vége:</span><span id="meddig" class="adat"></span><br>
@@ -58,8 +61,20 @@
         <span class="cimke">Vég:</span><span id="veg" class="adat"></span><br>
         <span class="cimke">Megnevezés:</span><span id="megnevezes" class="adat"></span><br>
         <span class="cimke">Mérték:</span><span id="mertek" class="adat"></span><br>
-      </div>    
-      
+        
+      </div>        
     </div>
+    <br>
+    <br>
+    <div id="gombok">
+      <button onclick="self.close()">
+        Bezár
+      </button>
+      <form action="http://localhost/web222/pdf/pdf4" method="post">
+        <input type="hidden" name="az2" id="az2" class="adat">
+        <input type="submit" name="nyomtat" value="Nyomtat">
+      </form>
+      
+    </div>   
   </body>
 </html>

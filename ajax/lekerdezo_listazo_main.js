@@ -64,7 +64,7 @@ function munka() {
             "listazo.php",
             {"op" : "info", "id" : munka},
             function(data) {
-                $("#az").text(data.id); 
+                $("#az").text(data.id);                
                 $("#mettol").text(data.mettol);
                 $("#meddig").text(data.meddig);
                 $("#telepules").text(data.telepules);
@@ -73,14 +73,23 @@ function munka() {
                 $("#veg").text(data.veg);
                 $("#megnevezes").text(data.megnevezes);
                 $("#mertek").text(data.mertek);
-                
+                document.getElementById("az2").value = data.id;             
             },
             "json"                                                    
         );
+        
     }
+}
+function hiv(){    
+    $("#az2").html("");    
+    var id=$("#az").val();    
+    document.getElementById("#az2").value=id;    
 }
 
 
+
+
+//document.getElementById('output').innerHTML = "100";
 
 $(document).ready(function() {
    telepulesek();
@@ -88,6 +97,7 @@ $(document).ready(function() {
    $("#telepulesselect").change(mertekek);
    $("#mertekselect").change(munkak);
    $("#munkaselect").change(munka);
+   $("#az").change(hiv);
    
    $(".adat").hover(function() {
         $(this).css({"color" : "white", "background-color" : "black"});

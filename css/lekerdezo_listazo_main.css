@@ -1,0 +1,29 @@
+#informaciosdiv {
+    width: 600px;
+  }
+#adatok {
+    float: right;
+}
+
+  #intezmenyinfo {
+    
+    border: 1px solid black;
+    width: 300px;
+    height: 250px;
+  }
+  .cimke{
+    display: inline-block;
+    width: 80px;
+    text-align: right;
+  }
+  span {
+    margin: 3px 5px;
+  }
+  label {
+    display: inline-block;
+    width: 70px;
+    text-align: left;
+  }
+  select {
+    width: 250px;
+  }
